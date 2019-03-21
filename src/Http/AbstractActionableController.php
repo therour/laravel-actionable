@@ -42,7 +42,7 @@ abstract class AbstractActionableController extends Controller
     public function __invoke(Request $request, Container $app)
     {
         $this->app = $app;
-        $this->request = $request;
+        $this->request = $this->getRequest($request);
         $this->route = $request->route();
         $this->action = $this->getAction();
 
@@ -82,6 +82,24 @@ abstract class AbstractActionableController extends Controller
     }
 
     /**
+     * Resolve Request instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Request
+     */
+    protected function getRequest($request)
+    {
+        if ($requestClass = Arr::get($request->route()->parameters(), 'form_request')) {
+            $request = $this->app->make($requestClass);
+            if (! $request instanceof Request) {
+                throw new \RuntimeException('request class must be an instance of \Illuminate\Http\Request');
+            }
+        }
+
+        return $request;
+    }
+
+    /**
      * Get the Actionable class instance.
      *
      * @return \Therour\Actionable\Contracts\Actionable
@@ -100,7 +118,7 @@ abstract class AbstractActionableController extends Controller
     {
         return array_merge(
             $this->request->all(),
-            Arr::except($this->route->parameters(), ['actionable'])
+            Arr::except($this->route->parameters(), ['actionable', 'form_request'])
         );
     }
 }

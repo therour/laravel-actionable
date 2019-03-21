@@ -45,6 +45,10 @@ class ServiceProvider extends LaravelServiceProvider
             $route->defaults = ['actionable' => $action];
             return $route;
         });
+
+        \Illuminate\Routing\Route::macro('request', function (string $requestClass) {
+            $this->defaults['form_request'] = $requestClass;
+        });
         
         if (config('actionable.enable_actions_route')) {
             Route::group(
