@@ -21,9 +21,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            $this->defaultActionableConfigPath, 'actionable'
-        );
+        $this->mergeConfigFrom($this->defaultActionableConfigPath, 'actionable');
     }
 
     /**
