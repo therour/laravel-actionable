@@ -1,4 +1,4 @@
-#Actionable - Laravel Single Action Class Routing
+# Actionable - Laravel Single Action Class Routing
 
 Laravel Actionable is used to create single action class and made routing simple to them.
 
