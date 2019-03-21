@@ -1,5 +1,5 @@
 {
-    "name": "therour/actionable",
+    "name": "therour/laravel-actionable",
     "description": "Single Class Action Handler for Laravel Framework",
     "keywords": ["laravel", "controller", "action"],
     "license": "MIT",
