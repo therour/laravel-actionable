@@ -33,7 +33,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
         $this->publishes([
             $this->defaultActionableConfigPath => config_path('actionable.php')
-        ]);
+        ], 'config');
 
         
         Router::macro('action', function ($methods, $uri, $action) {
