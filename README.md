@@ -78,6 +78,10 @@ or you may edit `route_path` in your `config/actionable.php` configuration
 
 Route::action('GET', '/user/{id}', App\User\Actions\GetUser::class);
 
+// If you need to define your FormRequest class
+Route::action('POST', '/user', App\user\Actions\CreateUser::class)
+    ->request(App\User\Http\Request\CreateUserRequest::class);
+
 ```
 then you can hit `/user/{id}` endpoint
 
