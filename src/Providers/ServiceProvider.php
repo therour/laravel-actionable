@@ -50,7 +50,8 @@ class ServiceProvider extends LaravelServiceProvider
             $this->defaults['form_request'] = $requestClass;
         });
         
-        if (config('actionable.enable_actions_route')) {
+        $routePath = config('actionable.route_path', base_path('routes/actions.php'));
+        if (config('actionable.enable_actions_route') && file_exists($routePath)) {
             Route::group(
                 [],
                 config('actionable.route_path', base_path('routes/actions.php'))
