@@ -18,9 +18,19 @@
         "illuminate/contracts": "~5.4",
         "php": "^7.1.3"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0",
+        "orchestra/testbench": "^3.5",
+        "orchestra/testbench-browser-kit": "^3.5"
+    },
     "autoload": {
         "psr-4": {
             "Therour\\Actionable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Therour\\Actionable\\Tests\\": "tests/"
         }
     },
     "extra": {

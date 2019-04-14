@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Validator;
-use Therour\Actionable\Contracts\Actionable;
+use Therour\Actionable\Actions\Actionable;
 use Illuminate\Contracts\Support\Responsable;
 
 abstract class AbstractActionableController extends Controller
@@ -28,7 +28,7 @@ abstract class AbstractActionableController extends Controller
     protected $app;
 
     /**
-     * @var \Therour\Actionable\Contracts\Actionable
+     * @var \Therour\Actionable\Actions\Actionable
      */
     protected $action;
 
@@ -46,10 +46,7 @@ abstract class AbstractActionableController extends Controller
         $this->route = $request->route();
         $this->action = $this->getAction();
 
-        $data = $this->getData();
-        $this->validate($data);
-        
-        $result = $this->execute($this->action, $data);
+        $result = $this->execute($this->action, $this->getData());
         
         return $result;
     }
@@ -57,29 +54,12 @@ abstract class AbstractActionableController extends Controller
     /**
      * Execute action.
      *
-     * @param \Therour\Actionable\Contracts\Actionable $action
+     * @param \Therour\Actionable\Actions\Actionable $action
      * @param array $data
      * @return mixed
      */
     abstract protected function execute(Actionable $action, array $data);
 
-    /**
-     * Validate data.
-     *
-     * @param array $data
-     * @return void
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    protected function validate(array $data)
-    {
-        if (method_exists($this->action, 'rules')) {
-            Validator::make(
-                $data,
-                $this->action->rules(),
-                method_exists($this->action, 'messages') ? $this->action->messages() : []
-            )->validate();
-        }
-    }
 
     /**
      * Resolve Request instance.
@@ -102,7 +82,7 @@ abstract class AbstractActionableController extends Controller
     /**
      * Get the Actionable class instance.
      *
-     * @return \Therour\Actionable\Contracts\Actionable
+     * @return \Therour\Actionable\Actions\Actionable
      */
     protected function getAction()
     {
@@ -117,8 +97,8 @@ abstract class AbstractActionableController extends Controller
     protected function getData()
     {
         return array_merge(
-            $this->request->all(),
-            Arr::except($this->route->parameters(), ['actionable', 'form_request'])
+            Arr::except($this->route->parameters(), ['actionable', 'form_request']),
+            $this->request->all()
         );
     }
 }
