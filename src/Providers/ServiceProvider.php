@@ -3,6 +3,7 @@
 namespace Therour\Actionable\Providers;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
@@ -50,12 +51,28 @@ class ServiceProvider extends LaravelServiceProvider
             $this->defaults['form_request'] = $requestClass;
         });
         
-        $routePath = config('actionable.route_path', base_path('routes/actions.php'));
-        if (config('actionable.enable_actions_route') && file_exists($routePath)) {
-            Route::group(
-                [],
-                config('actionable.route_path', base_path('routes/actions.php'))
+        $routePath = config('actionable.route_path');
+        if (config('actionable.enable_actions_route')) {
+            $this->loadRoutes($routePath);
+        }
+    }
+
+    protected function loadRoutes($routePath)
+    {
+        if (is_array($routePath)) {
+            foreach ($routePath as $path) {
+                $this->loadRoutes($path);
+            }
+        } elseif (is_string($routePath) && Str::endsWith($routePath, '.php') && file_exists(base_path($routePath))) {
+            Route::group([], base_path($routePath));
+        } elseif (is_string($routePath) && is_dir($routePath)) {
+            $routes = glob(
+                Str::finish(base_path($routePath), '/') . '*'
             );
+
+            foreach ($routes as $route) {
+                $this->loadRoutes($route);
+            }
         }
     }
 }
