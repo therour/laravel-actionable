@@ -9,7 +9,7 @@ use Therour\Actionable\Actions\Actionable;
 use Illuminate\Contracts\Support\Responsable;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class LoadMessageAction implements Actionable, Responsable
+class LoadAllMessageAction implements Actionable, Responsable
 {
     protected $cache;
 
@@ -20,20 +20,19 @@ class LoadMessageAction implements Actionable, Responsable
         $this->cache = $cache;
     }
 
-    public function run($key)
+    public function run()
     {
         $message = $this->cache->get('message');
-
-        $message = Arr::get($message, $key);
-        if ($message == null) {
-            throw new NotFoundHttpException("Cache {$key} is not found.");
-        }
 
         return $this->result = $message;
     }
 
     public function toResponse($request)
     {
-        return new JsonResponse(['data' => ['message' => $this->result]]);
+        $data = array_map(function ($message) {
+            return ['message' => $message];
+        }, $this->result);
+
+        return new JsonResponse(compact('data'));
     }
 }
