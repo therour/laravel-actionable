@@ -4,7 +4,7 @@ namespace Therour\Actionable\Tests\Actions;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Cache\CacheManager;
-use Therour\Actionable\Actions\Actionable;
+use Therour\Actionable\Contracts\Actionable;
 use Illuminate\Contracts\Support\Responsable;
 use Therour\Actionable\Tests\Params\MessageParam;
 use Therour\Actionable\Tests\Actions\LoadAllMessageAction;

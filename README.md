@@ -54,7 +54,7 @@ Create a class implementing `Therour\Actionable\Contracts\Actionable` interface
 the route parameter `{id}` will be passed to variable `$id` at the `run` method of actionable class.
 
 ```php
-use Therour\Actionable\Actions\Actionable;
+use Therour\Actionable\Contracts\Actionable;
 use App\User\Models\User;
 
 class GetUser implements Actionable

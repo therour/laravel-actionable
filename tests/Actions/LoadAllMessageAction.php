@@ -5,7 +5,7 @@ namespace Therour\Actionable\Tests\Actions;
 use Illuminate\Support\Arr;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Cache\CacheManager;
-use Therour\Actionable\Actions\Actionable;
+use Therour\Actionable\Contracts\Actionable;
 use Illuminate\Contracts\Support\Responsable;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

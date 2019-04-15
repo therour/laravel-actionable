@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Validator;
-use Therour\Actionable\Actions\Actionable;
+use Therour\Actionable\Contracts\Actionable;
 use Illuminate\Contracts\Support\Responsable;
 
 abstract class AbstractActionableController extends Controller
@@ -28,7 +28,7 @@ abstract class AbstractActionableController extends Controller
     protected $app;
 
     /**
-     * @var \Therour\Actionable\Actions\Actionable
+     * @var \Therour\Actionable\Contracts\Actionable
      */
     protected $action;
 
@@ -54,7 +54,7 @@ abstract class AbstractActionableController extends Controller
     /**
      * Execute action.
      *
-     * @param \Therour\Actionable\Actions\Actionable $action
+     * @param \Therour\Actionable\Contracts\Actionable $action
      * @param array $data
      * @return mixed
      */
@@ -82,7 +82,7 @@ abstract class AbstractActionableController extends Controller
     /**
      * Get the Actionable class instance.
      *
-     * @return \Therour\Actionable\Actions\Actionable
+     * @return \Therour\Actionable\Contracts\Actionable
      */
     protected function getAction()
     {

@@ -2,7 +2,7 @@
 
 namespace Therour\Actionable\Tests\Actions;
 
-use Therour\Actionable\Actions\Actionable;
+use Therour\Actionable\Contracts\Actionable;
 
 class PingAction implements Actionable
 {

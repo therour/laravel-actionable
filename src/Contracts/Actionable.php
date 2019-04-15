@@ -1,6 +1,6 @@
 <?php
 
-namespace Therour\Actionable\Actions;
+namespace Therour\Actionable\Contracts;
 
 interface Actionable
 {

@@ -3,7 +3,7 @@
 namespace Therour\Actionable\Http;
 
 use Illuminate\Support\Arr;
-use Therour\Actionable\Actions\Actionable;
+use Therour\Actionable\Contracts\Actionable;
 use Therour\Actionable\Params\AbstractParam;
 use Illuminate\Contracts\Support\Responsable;
 use Therour\Actionable\Http\AbstractActionableController;
@@ -13,7 +13,7 @@ class ActionController extends AbstractActionableController
     /**
      * Execute action.
      *
-     * @param \Therour\Actionable\Actions\Actionable $action
+     * @param \Therour\Actionable\Contracts\Actionable $action
      * @param array $data
      * @return mixed
      */
@@ -31,7 +31,7 @@ class ActionController extends AbstractActionableController
     /**
      * resolve Running Action.
      *
-     * @param \Therour\Actionable\Actions\Actionable $action
+     * @param \Therour\Actionable\Contracts\Actionable $action
      * @param array $data
      * @return mixed
      */
@@ -45,7 +45,7 @@ class ActionController extends AbstractActionableController
     /**
      * Resolving parameters action run method.
      *
-     * @param \Therour\Actionable\Actions\Actionable $action
+     * @param \Therour\Actionable\Contracts\Actionable $action
      * @param array $data
      * @return array
      */
